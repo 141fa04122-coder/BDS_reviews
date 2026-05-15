@@ -515,6 +515,72 @@
       gap: 10px;
     }
 
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 20px 24px;
+      background: #f8f9fa;
+      border-top: 1px solid #e9ecef;
+      font-size: 0.78rem;
+      color: #888;
+      line-height: 1.5;
+    }
+    .footer a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+    .developed-by {
+      margin-top: 6px;
+      font-size: 0.72rem;
+      opacity: 0.7;
+    }
+    .client-info {
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid #e9ecef;
+      text-align: left;
+      font-size: 0.82rem;
+      color: #555;
+      line-height: 1.7;
+    }
+    .client-info strong {
+      color: #333;
+      display: inline-block;
+      min-width: 70px;
+    }
+    .client-info-row {
+      margin-bottom: 4px;
+    }
+    .whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #25D366;
+      color: white;
+      padding: 8px 18px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.82rem;
+      margin-top: 10px;
+      transition: all 0.2s;
+    }
+    .whatsapp-btn:hover {
+      background: #20ba5a;
+      transform: translateY(-1px);
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+    }
+
+    /* Client Logo */
+    .client-logo {
+      margin-bottom: 18px;
+    }
+
     @media (max-width: 480px) {
       body {
         padding: 8px;
@@ -575,18 +641,23 @@
       const app = document.getElementById('app');
 
       app.innerHTML = `
-        <div class="header">
+         <div class="header">
           <div class="brand-container">
+            <a href="https://www.businessanddatasolutions.com" target="_blank" title="Visit BDS Tech Team">
             <div class="brand-logo"><img src="https://res.cloudinary.com/dsf4d41i8/image/upload/v1770554625/BDS_Logowhite_odmpw0_vyhjes.png" alt="BDS Logo"></div>
+            </a>
             <div class="brand-text">
               <h1>Manchester Biryani House</h1>
               <p>Premium Feedback</p>
+
             </div>
           </div>
           <p class="tagline">Authentic flavours, delivered fresh</p>
         </div>
 
+
         <div class="content verification">
+
           <div class="client-logo" style="margin-bottom: 18px;">
             <img src="https://res.cloudinary.com/dsf4d41i8/image/upload/v1778822482/copy_of_whatsapp_image_2026-05-11_at_35235_pm_rhztxk.jpg" alt="Client" style="max-width: 100px; max-height: 80px; object-fit: contain;">
           </div>
@@ -707,7 +778,9 @@
       app.innerHTML = `
         <div class="header">
           <div class="brand-container">
+            <a href="https://www.businessanddatasolutions.com" target="_blank" title="Visit BDS Tech Team">
             <div class="brand-logo"><img src="https://res.cloudinary.com/dsf4d41i8/image/upload/v1770554625/BDS_Logowhite_odmpw0_vyhjes.png" alt="BDS Logo"></div>
+            </a>
             <div class="brand-text">
               <h1>Manchester Biryani House</h1>
               <p>Premium Feedback</p>
@@ -849,6 +922,13 @@
               <span>✓</span>
               <span>Feedback Received</span>
             </div>
+            <div class="client-info">
+              <div class="client-info-row"><strong>📍 Address:</strong> Kitchen 1C, 42 Higher Ardwick, Manchester M12 6DA</div>
+              <div class="client-info-row"><strong>📞 Phone:</strong> <a href="tel:07884568078">07884568078</a></div>
+              <div class="client-info-row"><strong>📧 Email:</strong> <a href="mailto:thebiryanis.co.uk@gmail.com">thebiryanis.co.uk@gmail.com</a></div>
+              <div class="client-info-row"><strong>🌐 Website:</strong> <a href="https://thebiryanis.co.uk/" target="_blank">thebiryanis.co.uk</a></div>
+              <a href="https://wa.me/447884568078" target="_blank" class="whatsapp-btn">💬 Chat on WhatsApp</a>
+            </div>
           </div>
         `;
       } catch (error) {
@@ -859,5 +939,15 @@
 
     init();
   </script>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div>🍛 <strong>Manchester Biryani House</strong></div>
+    <div>Kitchen 1C, 42 Higher Ardwick, Manchester M12 6DA</div>
+    <div>📞 <a href="tel:07884568078">07884568078</a> | 📧 <a href="mailto:thebiryanis.co.uk@gmail.com">thebiryanis.co.uk@gmail.com</a></div>
+    <div>🌐 <a href="https://thebiryanis.co.uk/" target="_blank">thebiryanis.co.uk</a> | 💬 <a href="https://wa.me/447884568078" target="_blank">WhatsApp</a></div>
+    <div class="developed-by">Developed by <a href="https://www.businessanddatasolutions.com" target="_blank">BDS Tech Team</a></div>
+  </div>
+
 </body>
 </html>
