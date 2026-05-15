@@ -94,14 +94,15 @@
     .badge-yes { background: #d4edda; color: #155724; }
     .badge-maybe { background: #fff3cd; color: #856404; }
     .badge-no { background: #f8d7da; color: #721c24; }
-    .export-btn {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      border: none;
-      padding: 12px 25px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
+    .client-logo {
+      margin-bottom: 18px;
+    }
+    .client-logo img {
+      max-width: 100px;
+      max-height: 80px;
+      object-fit: contain;
+    }
+
       margin-bottom: 20px;
     }
     .export-btn:hover {
@@ -121,8 +122,11 @@
 <body>
   <div class="container">
     <div class="header">
-      <h1>🍛 Manchester Biryani House</h1>
-      <p>Customer Feedback Dashboard</p>
+      <h1><img src="https://res.cloudinary.com/dsf4d41i8/image/upload/v1770554625/BDS_Logowhite_odmpw0_vyhjes.png" alt="BDS Logo" style="height:40px;vertical-align:middle;margin-right:12px;"> Manchester Biryani House</h1>
+      <p>Customer Feedback Dashboard<br><small style="opacity:0.7;font-size:0.8rem;">Powered by BDS</small></p>
+      <div class="client-logo" style="margin-top:12px;">
+        <img src="https://res.cloudinary.com/dsf4d41i8/image/upload/v1778822482/copy_of_whatsapp_image_2026-05-11_at_35235_pm_rhztxk.jpg" alt="Client" style="max-height: 60px;">
+      </div>
     </div>
 
     <div class="stats" id="stats">
