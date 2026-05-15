@@ -256,8 +256,18 @@ const questions = [
       { value: 'maybe', label: 'Maybe, depending on offers' },
       { value: 'no', label: 'No' }
     ],
+    nextCondition: () => 'join_whatsapp'
+  },
+  {
+    id: 'join_whatsapp',
+    type: 'radio',
+    question: 'Join our VIP WhatsApp group for exclusive deals & early launch access?',
+    options: [
+      { value: 'yes', label: 'Yes, send me the link!' },
+      { value: 'no', label: 'Not right now' }
+    ],
     nextCondition: null // End of survey
-  }
+  },
 ];
 
 // Get first question
