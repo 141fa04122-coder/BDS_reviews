@@ -16,12 +16,20 @@
       "dest": "/server.js"
     },
     {
-      "src": "/",
+      "src": "/admin.html",
       "dest": "/server.js"
     },
     {
-      "src": "/(.*)",
-      "dest": "/public/$1"
+      "src": "/loyalty.html",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/(\\w+\\.\\w+)",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/",
+      "dest": "/server.js"
     }
   ]
 }
