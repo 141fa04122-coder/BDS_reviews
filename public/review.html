@@ -3,19 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>We Value Your Feedback | Manchester Biryani House</title>
+  <title>Feedback | The Biryanis</title>
   <style>
     :root {
       --primary: #B8860B;
       --primary-dark: #8B6914;
       --secondary: #1a1a2e;
-      --accent: #C9A94D;
       --bg: linear-gradient(145deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
-      --card: rgba(255, 255, 255, 0.95);
+      --card: #ffffff;
       --text: #2c3e50;
       --text-light: #6c757d;
       --success: #27ae60;
       --gold: linear-gradient(135deg, #B8860B 0%, #DAA520 50%, #B8860B 100%);
+      --radius: 20px;
+      --shadow: 0 20px 60px rgba(0,0,0,0.3);
     }
 
     * {
@@ -24,75 +25,64 @@
       box-sizing: border-box;
     }
 
+    html, body {
+      height: 100%;
+    }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       background: var(--bg);
-      min-height: 100vh;
-      min-height: 100dvh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 12px;
+      padding: 10px;
       line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
     }
 
     .app-wrapper {
       width: 100%;
-      max-width: 640px;
+      max-width: 600px;
       background: var(--card);
-      border-radius: 24px;
-      box-shadow: 0 25px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.3);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
       overflow: hidden;
-      position: relative;
-      animation: slideUp 0.5s ease-out;
+      animation: slideUp 0.4s ease-out;
     }
 
     @keyframes slideUp {
-      from { opacity: 0; transform: translateY(30px); }
+      from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Gold accent line at top */
-    .gold-top-line {
+    /* Gold accent line */
+    .gold-line {
       height: 4px;
       background: var(--gold);
-      background-size: 200% 200%;
-      animation: shimmer 3s ease-in-out infinite;
     }
 
-    @keyframes shimmer {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
-
-    /* Premium Header */
+    /* Header */
     .header {
-      padding: 28px 24px 20px;
-      text-align: center;
-      position: relative;
-      background: linear-gradient(to bottom, #fafafa, white);
-      border-bottom: 1px solid rgba(184, 134, 11, 0.1);
-    }
-
-    .brand-container {
+      padding: 24px 20px 20px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 16px;
+      gap: 14px;
+      background: linear-gradient(to bottom, #fafafa, #fff);
+      border-bottom: 1px solid rgba(184, 134, 11, 0.15);
     }
 
     .brand-logo {
-      width: 52px;
-      height: 52px;
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
       background: var(--gold);
-      border-radius: 14px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 26px;
-      box-shadow: 0 4px 15px rgba(184, 134, 11, 0.3);
+      box-shadow: 0 3px 10px rgba(184, 134, 11, 0.3);
       overflow: hidden;
+      text-decoration: none;
     }
 
     .brand-logo img {
@@ -102,114 +92,86 @@
     }
 
     .brand-text {
-      text-align: left;
+      flex: 1;
+      min-width: 0;
     }
 
     .brand-text h1 {
-      font-size: 1.5rem;
+      font-size: 1.25rem;
       font-weight: 800;
       color: var(--secondary);
-      letter-spacing: -0.5px;
       line-height: 1.2;
+      margin: 0 0 2px 0;
     }
 
-    .brand-text p {
-      font-size: 0.85rem;
-      color: var(--primary);
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    }
-
-    .tagline {
-      font-size: 0.95rem;
+    .brand-text .tagline {
+      font-size: 0.8rem;
       color: var(--text-light);
       font-style: italic;
-      margin-top: 8px;
     }
 
-    /* Progress Bar */
-    .progress-container {
-      padding: 0 24px;
-      margin-bottom: 4px;
+    /* Progress */
+    .progress-wrap {
+      padding: 16px 24px 8px;
     }
 
     .progress-bar {
-      height: 6px;
+      height: 5px;
       background: #e9ecef;
       border-radius: 3px;
       overflow: hidden;
-      position: relative;
     }
 
     .progress-fill {
       height: 100%;
       background: var(--gold);
       border-radius: 3px;
-      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-    }
-
-    .progress-fill::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-      animation: progressShine 2s ease-in-out infinite;
-    }
-
-    @keyframes progressShine {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(100%); }
+      transition: width 0.3s ease;
     }
 
     .progress-text {
       text-align: center;
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       color: var(--text-light);
-      margin-top: 6px;
+      margin-top: 5px;
       font-weight: 500;
     }
 
-    /* Content Area */
+    /* Content */
     .content {
-      padding: 24px;
+      padding: 20px 24px 24px;
     }
 
-    .question-container {
-      animation: fadeInUp 0.35s ease-out;
+    .question-box {
+      animation: fadeIn 0.3s ease;
     }
 
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(12px); }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .question {
-      font-size: 1.15rem;
+    .question-label {
+      font-size: 1rem;
       font-weight: 700;
-      color: var(--secondary);
-      margin-bottom: 15px;
-      line-height: 1.35;
+      color: var(--text);
+      margin-bottom: 16px;
+      line-height: 1.4;
     }
 
-    .question-number {
-      display: inline-block;
+    .question-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
       background: var(--gold);
-      color: white;
-      width: 26px;
-      height: 26px;
+      color: #fff;
       border-radius: 50%;
-      text-align: center;
-      line-height: 26px;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 700;
       margin-right: 8px;
-      vertical-align: middle;
-      box-shadow: 0 2px 8px rgba(184, 134, 11, 0.3);
+      flex-shrink: 0;
     }
 
     /* Options */
@@ -217,63 +179,39 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .option {
-      padding: 16px 20px;
+      padding: 14px 16px;
       border: 2px solid #e9ecef;
       border-radius: 14px;
       cursor: pointer;
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-      background: white;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .option::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: var(--gold);
-      opacity: 0;
-      transition: opacity 0.25s;
+      transition: all 0.2s ease;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
     .option:hover {
       border-color: var(--primary);
-      transform: translateX(4px);
-      box-shadow: 0 4px 12px rgba(184, 134, 11, 0.1);
+      background: #fffdf5;
     }
 
     .option.selected {
       border-color: var(--primary);
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      color: white;
-      transform: scale(1.01);
-      box-shadow: 0 6px 20px rgba(184, 134, 11, 0.25);
+      background: var(--gold);
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(184, 134, 11, 0.25);
     }
 
-    .option.selected .option-label span {
-      color: white;
-    }
+    .option input { display: none; }
 
-    .option input {
-      display: none;
-    }
-
-    .option-label {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .radio-circle, .checkbox-square {
-      width: 22px;
-      height: 22px;
-      border: 2px solid #cbd5e0;
+    .check-circle, .check-box {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #ccc;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -282,348 +220,418 @@
       transition: all 0.2s;
     }
 
-    .checkbox-square {
-      border-radius: 6px;
+    .check-box { border-radius: 5px; }
+
+    .option.selected .check-circle,
+    .option.selected .check-box {
+      border-color: #fff;
+      background: #fff;
+      box-shadow: inset 0 0 0 2px var(--primary);
     }
 
-    .option.selected .radio-circle,
-    .option.selected .checkbox-square {
-      border-color: white;
-      background: white;
-      box-shadow: 0 0 0 3px rgba(255,255,255,0.2);
-    }
-
-    .radio-circle::after,
-    .checkbox-square::after {
+    .check-circle::after, .check-box::after {
       content: '';
       display: none;
-      transition: all 0.2s;
     }
 
-    .option.selected .radio-circle::after {
+    .option.selected .check-circle::after {
       display: block;
-      width: 10px;
-      height: 10px;
+      width: 9px;
+      height: 9px;
       background: var(--primary);
       border-radius: 50%;
     }
 
-    .option.selected .checkbox-square::after {
+    .option.selected .check-box::after {
       display: block;
-      width: 10px;
-      height: 10px;
+      width: 9px;
+      height: 9px;
       background: var(--primary);
-      border-radius: 3px;
+      border-radius: 2px;
+    }
+
+    .option-label-text {
+      flex: 1;
+      font-size: 0.95rem;
+    }
+
+    /* Checkbox grid */
+    .checkbox-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    /* Rating */
+    .rating-strip {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .rating-item {
+      flex: 1;
+      min-width: 56px;
+      text-align: center;
     }
 
     /* Textarea */
     textarea {
       width: 100%;
-      padding: 15px;
+      padding: 14px;
       border: 2px solid #e9ecef;
       border-radius: 14px;
       font-size: 1rem;
       font-family: inherit;
       resize: vertical;
-      min-height: 100px;
-      transition: all 0.2s;
+      min-height: 90px;
+      transition: border-color 0.2s;
       line-height: 1.5;
     }
 
     textarea:focus {
       outline: none;
       border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.1);
     }
 
     /* Buttons */
-    .button-group {
+    .btn-row {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       margin-top: 20px;
     }
 
     .btn {
       flex: 1;
-      padding: 16px 30px;
+      padding: 15px 20px;
       border: none;
       border-radius: 14px;
       font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.2s;
       text-align: center;
-    }
-
-    .btn:active {
-      transform: scale(0.98);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
     }
 
     .btn-primary {
       background: var(--gold);
-      color: white;
-      box-shadow: 0 4px 20px rgba(184, 134, 11, 0.35);
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(184, 134, 11, 0.3);
     }
 
     .btn-primary:hover:not(:disabled) {
-      background: #d4a843;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(184, 134, 11, 0.45);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(184, 134, 11, 0.4);
     }
 
     .btn-primary:disabled {
       opacity: 0.5;
       cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
     }
 
     .btn-secondary {
-      background: #f8f9fa;
+      background: #f1f3f5;
       color: #495057;
       border: 1px solid #dee2e6;
     }
 
-    .btn-secondary:hover {
-      background: #e9ecef;
-    }
-
-    /* Verification Screen */
-    .verification {
+    /* Verification */
+    .verify-box {
       text-align: center;
-      padding: 20px 0;
+      padding: 10px 0 20px;
     }
 
-    .verification h2 {
-      font-size: 1.5rem;
+    .verify-box h2 {
+      font-size: 1.4rem;
       color: var(--secondary);
       margin-bottom: 8px;
       font-weight: 700;
     }
 
-    .verification .subtitle {
+    .verify-box p {
       color: var(--text-light);
-      margin-bottom: 28px;
       font-size: 0.95rem;
+      margin-bottom: 24px;
     }
 
     .input-group {
-      margin-bottom: 16px;
+      margin-bottom: 14px;
       text-align: left;
     }
 
     .input-group label {
       display: block;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       color: var(--text);
       font-weight: 600;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
 
     .input-group input {
       width: 100%;
-      padding: 16px;
+      padding: 14px 16px;
       border: 2px solid #e9ecef;
       border-radius: 14px;
       font-size: 1rem;
-      transition: all 0.2s;
+      transition: border-color 0.2s;
       background: #fafafa;
     }
 
     .input-group input:focus {
       outline: none;
       border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.1);
-      background: white;
+      background: #fff;
     }
 
-    /* Success Screen */
-    .success {
+    /* Client logo on verify */
+    .client-logo-wrap {
       text-align: center;
-      padding: 50px 24px;
+      margin-bottom: 20px;
+    }
+
+    .client-logo-wrap img {
+      max-width: 90px;
+      max-height: 70px;
+      object-fit: contain;
+    }
+
+    /* Success */
+    .success-box {
+      text-align: center;
+      padding: 30px 24px 20px;
     }
 
     .success-icon {
-      font-size: 5rem;
-      margin-bottom: 20px;
-      animation: fadeInUp 0.5s ease-out;
+      font-size: 4rem;
+      margin-bottom: 16px;
+      animation: popIn 0.4s ease;
     }
 
-    .success h2 {
-      font-size: 1.8rem;
+    @keyframes popIn {
+      0% { transform: scale(0); }
+      80% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .success-box h2 {
+      font-size: 1.6rem;
       color: var(--secondary);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       font-weight: 700;
     }
 
-    .success p {
+    .success-box p {
       color: var(--text-light);
-      line-height: 1.6;
-      font-size: 1rem;
+      font-size: 0.95rem;
+      margin-bottom: 8px;
       max-width: 400px;
-      margin: 0 auto;
-    }
-
-    .success .highlight {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      font-weight: 700;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .reward-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
-      color: white;
-      padding: 12px 24px;
+      background: var(--success);
+      color: #fff;
+      padding: 10px 20px;
       border-radius: 30px;
       font-weight: 600;
-      margin-top: 24px;
+      font-size: 0.9rem;
+      margin-top: 16px;
       box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
-      animation: fadeInUp 0.6s ease-out;
     }
 
-    /*Rating Stars*/
-    .star-big {
-      font-size: 1.6rem;
-      transition: transform 0.2s;
+    /* Client info block */
+    .client-info {
+      margin-top: 22px;
+      padding: 18px;
+      background: #f8f9fa;
+      border-radius: 14px;
+      text-align: left;
+      font-size: 0.82rem;
+      color: #555;
+      line-height: 1.6;
     }
 
-    .rating-options {
+    .client-info-row {
       display: flex;
+      align-items: flex-start;
       gap: 8px;
-      justify-content: center;
-      flex-wrap: wrap;
+      margin-bottom: 6px;
     }
 
-    .rating-option {
-      flex: 1;
-      min-width: 55px;
+    .client-info-row:last-child {
+      margin-bottom: 0;
     }
 
-    .rating-option .option {
+    .client-info-icon {
+      flex-shrink: 0;
+      width: 18px;
       text-align: center;
-      padding: 14px 10px;
     }
 
-    .checkbox-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 10px;
+    .client-info a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .client-info a:hover {
+      text-decoration: underline;
+    }
+
+    .wa-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #25D366;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-top: 12px;
+      transition: all 0.2s;
+    }
+
+    .wa-btn:hover {
+      background: #20ba5a;
+      text-decoration: none;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
     }
 
     /* Footer */
     .footer {
       text-align: center;
-      padding: 20px 24px;
+      padding: 18px 24px;
       background: #f8f9fa;
       border-top: 1px solid #e9ecef;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       color: #888;
-      line-height: 1.5;
+      line-height: 1.7;
     }
+
     .footer a {
       color: var(--primary);
       text-decoration: none;
       font-weight: 600;
     }
+
     .footer a:hover {
       text-decoration: underline;
     }
-    .developed-by {
+
+    .footer-divider {
+      display: inline-block;
+      margin: 0 6px;
+      opacity: 0.4;
+    }
+
+    .footer-credit {
       margin-top: 6px;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       opacity: 0.7;
     }
-    .client-info {
-      margin-top: 18px;
-      padding-top: 16px;
-      border-top: 1px solid #e9ecef;
-      text-align: left;
-      font-size: 0.82rem;
-      color: #555;
-      line-height: 1.7;
-    }
-    .client-info strong {
-      color: #333;
-      display: inline-block;
-      min-width: 70px;
-    }
-    .client-info-row {
-      margin-bottom: 4px;
-    }
-    .whatsapp-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: #25D366;
-      color: white;
-      padding: 8px 18px;
-      border-radius: 25px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.82rem;
-      margin-top: 10px;
-      transition: all 0.2s;
-    }
-    .whatsapp-btn:hover {
-      background: #20ba5a;
-      transform: translateY(-1px);
-      text-decoration: none;
-      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
-    }
 
-    /* Client Logo */
-    .client-logo {
-      margin-bottom: 18px;
-    }
-
+    /* Responsive */
     @media (max-width: 480px) {
       body {
-        padding: 8px;
-      }
-      body {
+        padding: 6px;
         align-items: flex-start;
-        padding-top: 20px;
+        padding-top: 16px;
       }
-      .content {
-        padding: 20px 18px;
+
+      .app-wrapper {
+        border-radius: 16px;
       }
+
       .header {
-        padding: 22px 20px 16px;
+        padding: 18px 16px 16px;
+        gap: 10px;
       }
+
       .brand-logo {
-        width: 44px;
-        height: 44px;
-        font-size: 22px;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
       }
+
       .brand-text h1 {
-        font-size: 1.25rem;
+        font-size: 1.1rem;
       }
-      .question {
-        font-size: 1.05rem;
+
+      .brand-text .tagline {
+        font-size: 0.72rem;
       }
+
+      .content {
+        padding: 16px 18px 20px;
+      }
+
+      .question-label {
+        font-size: 0.95rem;
+      }
+
+      .option {
+        padding: 12px 14px;
+      }
+
+      .option-label-text {
+        font-size: 0.88rem;
+      }
+
       .btn {
-        padding: 14px 20px;
+        padding: 14px 16px;
+        font-size: 0.92rem;
+        min-height: 48px;
       }
-      .rating-options {
-        flex-direction: column;
-      }
+
       .checkbox-grid {
         grid-template-columns: 1fr;
+      }
+
+      .verify-box h2 {
+        font-size: 1.25rem;
+      }
+
+      .progress-wrap {
+        padding: 12px 18px 6px;
+      }
+
+      .client-info {
+        padding: 14px;
+        font-size: 0.78rem;
+      }
+
+      .footer {
+        padding: 14px 18px;
+        font-size: 0.7rem;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .brand-text h1 {
+        font-size: 1rem;
+      }
+      .question-label {
+        font-size: 0.9rem;
       }
     }
   </style>
 </head>
 <body>
   <div class="app-wrapper">
-    <div class="gold-top-line"></div>
-    <div class="container" id="app">
-      <!-- Content injected by JS -->
-    </div>
+    <div class="gold-line"></div>
+    <div id="app"></div>
   </div>
 
   <script>
@@ -634,46 +642,49 @@
     let answers = {};
     let progress = 0;
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const ref = urlParams.get('r');
-
-    async function init() {
+    function renderVerify() {
       const app = document.getElementById('app');
-
       app.innerHTML = `
-         <div class="header">
-          <div class="brand-container">
-            <a href="https://www.businessanddatasolutions.com" target="_blank" title="Visit BDS Tech Team">
-            <div class="brand-logo"><img src="https://res.cloudinary.com/dsf4d41i8/image/upload/v1770554625/BDS_Logowhite_odmpw0_vyhjes.png" alt="BDS Logo"></div>
-            </a>
-            <div class="brand-text">
-              <h1>Manchester Biryani House</h1>
-              <p>Premium Feedback</p>
-
-            </div>
+        <div class="header">
+          <a href="https://www.businessanddatasolutions.com" target="_blank" title="BDS Tech Team" class="brand-logo">
+            <img src="https://res.cloudinary.com/dsf4d41i8/image/upload/v1770554625/BDS_Logowhite_odmpw0_vyhjes.png" alt="BDS">
+          </a>
+          <div class="brand-text">
+            <h1>The Biryanis</h1>
+            <div class="tagline">Authentic flavours, delivered fresh</div>
           </div>
-          <p class="tagline">Authentic flavours, delivered fresh</p>
         </div>
-
-
-        <div class="content verification">
-
-          <div class="client-logo" style="margin-bottom: 18px;">
-            <img src="https://res.cloudinary.com/dsf4d41i8/image/upload/v1778822482/copy_of_whatsapp_image_2026-05-11_at_35235_pm_rhztxk.jpg" alt="Client" style="max-width: 100px; max-height: 80px; object-fit: contain;">
+        <div class="content">
+          <div class="client-logo-wrap">
+            <img src="https://res.cloudinary.com/dsf4d41i8/image/upload/v1778822482/copy_of_whatsapp_image_2026-05-11_at_35235_pm_rhztxk.jpg" alt="The Biryanis">
           </div>
-          <h2>Your Experience Matters</h2>
-          <p class="subtitle">Thank you for ordering with us. This quick survey helps us serve you better.</p>
+          <div class="verify-box">
+            <h2>We Value Your Feedback</h2>
+            <p>Share your experience — it only takes 2 minutes!</p>
+          </div>
           <div class="input-group">
             <label for="phone">Mobile Number</label>
             <input type="tel" id="phone" placeholder="+44 7..." autocomplete="tel">
           </div>
           <div class="input-group">
             <label for="email">Email Address</label>
-            <input type="email" id="email" placeholder="your@email.com" autocomplete="email">
+            <input type="email" id="email" placeholder="you@example.com" autocomplete="email">
           </div>
-          <div class="button-group">
-            <button class="btn btn-primary" onclick="verify()">Start Review</button>
+          <div class="btn-row">
+            <button class="btn btn-primary" onclick="verify()">Start Survey</button>
           </div>
+        </div>
+      `;
+    }
+
+    function renderProgress(show) {
+      if (!show) return '';
+      return `
+        <div class="progress-wrap">
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: ${(progress / 15) * 100}%"></div>
+          </div>
+          <div class="progress-text">Question ${progress} of ~15</div>
         </div>
       `;
     }
@@ -683,19 +694,17 @@
       const email = document.getElementById('email').value;
 
       if (!phone && !email) {
-        alert('Please provide at least a phone number or email to begin.');
+        alert('Please provide a phone number or email to begin.');
         return;
       }
 
       try {
-        const response = await fetch(`${API_BASE}/api/verify`, {
+        const res = await fetch(`${API_BASE}/api/verify`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ phone, email })
         });
-
-        const data = await response.json();
-
+        const data = await res.json();
         if (data.verified) {
           sessionId = data.sessionId;
           customerId = data.customerId;
@@ -703,183 +712,121 @@
         } else {
           alert('Verification failed: ' + data.message);
         }
-      } catch (error) {
-        console.error('Error:', error);
+      } catch (e) {
         alert('Connection error. Please try again.');
       }
     }
 
     async function startSurvey() {
       try {
-        const response = await fetch(`${API_BASE}/api/start-survey?sessionId=${sessionId}&customerId=${customerId}`);
-        const data = await response.json();
+        const res = await fetch(`${API_BASE}/api/start-survey?sessionId=${sessionId}&customerId=${customerId}`);
+        const data = await res.json();
         currentQuestion = data.question;
         progress = 1;
         renderQuestion();
-      } catch (error) {
-        console.error('Error:', error);
+      } catch (e) {
         alert('Failed to start survey');
       }
     }
 
     function renderQuestion() {
       const app = document.getElementById('app');
-      const question = currentQuestion;
-      const questionNum = progress;
+      const q = currentQuestion;
 
-      let optionsHtml = '';
+      let html = `<div class="header">
+        <a href="https://www.businessanddatasolutions.com" target="_blank" title="BDS Tech Team" class="brand-logo">
+          <img src="https://res.cloudinary.com/dsf4d41i8/image/upload/v1770554625/BDS_Logowhite_odmpw0_vyhjes.png" alt="BDS">
+        </a>
+        <div class="brand-text">
+          <h1>The Biryanis</h1>
+          <div class="tagline">Authentic flavours, delivered fresh</div>
+        </div>
+      </div>
+      ${renderProgress(true)}
+      <div class="content">
+        <div class="question-box">
+          <div class="question-label"><span class="question-num">${progress}</span>${q.question}</div>`;
 
-      if (question.type === 'rating') {
-        optionsHtml = `
-          <div class="options rating-options">
-            ${question.options.map(opt => `
-              <div class="option rating-option" onclick="selectOption(this, '${opt.value}')">
-                <div class="option-label">${opt.label}</div>
-              </div>
-            `).join('')}
-          </div>
-        `;
-      } else if (question.type === 'radio') {
-        optionsHtml = `
-          <div class="options">
-            ${question.options.map(opt => `
-              <div class="option" onclick="selectOption(this, '${opt.value}')">
-                <div class="option-label">
-                  <div class="radio-circle"></div>
-                  <span>${opt.label}</span>
-                </div>
-              </div>
-            `).join('')}
-          </div>
-        `;
-      } else if (question.type === 'checkbox') {
-        optionsHtml = `
-          <div class="options checkbox-grid">
-            ${question.options.map(opt => `
-              <div class="option" onclick="toggleCheckbox(this, '${opt.value}')">
-                <div class="option-label">
-                  <div class="checkbox-square"></div>
-                  <span>${opt.label}</span>
-                </div>
-              </div>
-            `).join('')}
-          </div>
-        `;
-      } else if (question.type === 'textarea') {
-        optionsHtml = `
-          <div class="options">
-            <textarea id="textarea-input" placeholder="Share your thoughts..." maxlength="${question.maxLength || 500}" oninput="updateTextareaAnswer(this.value)"></textarea>
-          </div>
-        `;
+      if (q.type === 'rating') {
+        html += `<div class="rating-strip">
+          ${q.options.map(o => `<div class="rating-item">
+            <div class="option" onclick="selectOne(this, '${o.value}')"><div class="option-label-text">${o.label}</div></div>
+          </div>`).join('')}
+        </div>`;
+      } else if (q.type === 'radio') {
+        html += `<div class="options">
+          ${q.options.map(o => `<div class="option" onclick="selectOne(this, '${o.value}')">
+            <div class="check-circle"></div>
+            <span class="option-label-text">${o.label}</span>
+          </div>`).join('')}
+        </div>`;
+      } else if (q.type === 'checkbox') {
+        html += `<div class="options checkbox-grid">
+          ${q.options.map(o => `<div class="option" onclick="toggleCheck(this, '${o.value}')">
+            <div class="check-box"></div>
+            <span class="option-label-text">${o.label}</span>
+          </div>`).join('')}
+        </div>`;
+      } else if (q.type === 'textarea') {
+        html += `<textarea id="ta" placeholder="Share your thoughts..." maxlength="${q.maxLength || 500}" oninput="onTextarea(this.value)"></textarea>`;
       }
 
-      const showBack = progress > 1;
+      html += `<div class="btn-row">
+        ${progress > 1 ? `<button class="btn btn-secondary" onclick="goBack()">Back</button>` : ''}
+        <button class="btn btn-primary" id="nextBtn" onclick="nextQ()" disabled>Continue</button>
+      </div></div></div>`;
 
-      app.innerHTML = `
-        <div class="header">
-          <div class="brand-container">
-            <a href="https://www.businessanddatasolutions.com" target="_blank" title="Visit BDS Tech Team">
-            <div class="brand-logo"><img src="https://res.cloudinary.com/dsf4d41i8/image/upload/v1770554625/BDS_Logowhite_odmpw0_vyhjes.png" alt="BDS Logo"></div>
-            </a>
-            <div class="brand-text">
-              <h1>Manchester Biryani House</h1>
-              <p>Premium Feedback</p>
-            </div>
-          </div>
-        </div>
+      app.innerHTML = html;
 
-        <div class="progress-container">
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: ${(progress / 15) * 100}%"></div>
-          </div>
-          <div class="progress-text">Question ${progress} of ${question.required ? '15' : '~15'}</div>
-        </div>
-        <div class="content">
-          <div class="question-container">
-            <div class="question">
-              <span class="question-number">${progress}</span>${question.question}
-            </div>
-            ${optionsHtml}
-            <div class="button-group">
-              ${showBack ? `<button class="btn btn-secondary" onclick="goBack()">Back</button>` : ''}
-              <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" disabled>Continue</button>
-            </div>
-          </div>
-        </div>
-      `;
-
-      // Restore checkbox states if navigating back
-      if (question.type === 'checkbox' && answers[question.id]) {
-        const stored = Array.isArray(answers[question.id]) ? answers[question.id] : [answers[question.id]];
-        stored.forEach(val => {
-          const el = document.querySelector(`.option[onclick*="'${val}'"]`);
+      // Restore state
+      if (q.type === 'checkbox' && answers[q.id]) {
+        answers[q.id].forEach(v => {
+          const el = document.querySelector(`.option[onclick*="'${v}'"]`);
           if (el) el.classList.add('selected');
         });
       }
     }
 
-    function selectOption(element, value) {
-      element.parentElement.querySelectorAll('.option').forEach(el => {
-        el.classList.remove('selected');
-      });
-      element.classList.add('selected');
-      answers[currentQuestion.id] = value;
+    function selectOne(el, val) {
+      el.parentElement.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+      el.classList.add('selected');
+      answers[currentQuestion.id] = val;
       document.getElementById('nextBtn').disabled = false;
     }
 
-    function toggleCheckbox(element, value) {
-      element.classList.toggle('selected');
-
-      if (!answers[currentQuestion.id]) {
-        answers[currentQuestion.id] = [];
-      }
-
-      const selectedOptions = answers[currentQuestion.id];
-      const index = selectedOptions.indexOf(value);
-
-      if (index > -1) {
-        selectedOptions.splice(index, 1);
-      } else {
-        selectedOptions.push(value);
-      }
-
-      answers[currentQuestion.id].sort();
-
-      document.getElementById('nextBtn').disabled = answers[currentQuestion.id].length === 0;
-      if (questionIsRequired(currentQuestion) && answers[currentQuestion.id].length > 0) {
-        document.getElementById('nextBtn').disabled = false;
-      }
+    function toggleCheck(el, val) {
+      el.classList.toggle('selected');
+      answers[currentQuestion.id] = answers[currentQuestion.id] || [];
+      const arr = answers[currentQuestion.id];
+      const i = arr.indexOf(val);
+      i > -1 ? arr.splice(i, 1) : arr.push(val);
+      arr.sort();
+      document.getElementById('nextBtn').disabled = arr.length === 0;
+      if (currentQuestion.required && arr.length > 0) document.getElementById('nextBtn').disabled = false;
     }
 
-    function updateTextareaAnswer(value) {
-      answers[currentQuestion.id] = value;
-      document.getElementById('nextBtn').disabled = value.trim().length === 0 && questionIsRequired(currentQuestion);
+    function onTextarea(v) {
+      answers[currentQuestion.id] = v;
+      document.getElementById('nextBtn').disabled = v.trim().length === 0 && currentQuestion.required !== false;
     }
 
-    function questionIsRequired(question) {
-      return question.required !== false;
+    function required(q) {
+      return q.required !== false;
     }
 
-    async function nextQuestion() {
-      if (questionIsRequired(currentQuestion) && !answers[currentQuestion.id]) {
+    async function nextQ() {
+      if (required(currentQuestion) && !answers[currentQuestion.id]) {
         alert('Please answer this question');
         return;
       }
 
       try {
-        const response = await fetch(`${API_BASE}/api/answer`, {
+        const res = await fetch(`${API_BASE}/api/answer`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            sessionId,
-            customerId,
-            questionId: currentQuestion.id,
-            answer: answers[currentQuestion.id]
-          })
+          body: JSON.stringify({ sessionId, customerId, questionId: currentQuestion.id, answer: answers[currentQuestion.id] })
         });
-
-        const data = await response.json();
-
+        const data = await res.json();
         if (data.complete) {
           completeSurvey();
         } else {
@@ -887,8 +834,7 @@
           progress++;
           renderQuestion();
         }
-      } catch (error) {
-        console.error('Error:', error);
+      } catch (e) {
         alert('Failed to submit answer');
       }
     }
@@ -903,51 +849,32 @@
         await fetch(`${API_BASE}/api/complete-survey`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            sessionId,
-            customerId,
-            answers
-          })
+          body: JSON.stringify({ sessionId, customerId, answers })
         });
 
         const app = document.getElementById('app');
         app.innerHTML = `
-          <div class="gold-top-line"></div>
-          <div class="success">
+          <div class="gold-line"></div>
+          <div class="success-box">
             <div class="success-icon">🎉</div>
             <h2>Thank You!</h2>
-            <p>Your feedback means the world to us at <span class="highlight">Manchester Biryani House</span>.</p>
-            <p style="margin-top: 12px;">We'll use your suggestions to improve our service and bring you even better flavours.</p>
-            <div class="reward-badge">
-              <span>✓</span>
-              <span>Feedback Received</span>
-            </div>
+            <p>We really appreciate you taking the time to share your thoughts with us.</p>
+            <div class="reward-badge">✓ Feedback Received</div>
             <div class="client-info">
-              <div class="client-info-row"><strong>📍 Address:</strong> Kitchen 1C, 42 Higher Ardwick, Manchester M12 6DA</div>
-              <div class="client-info-row"><strong>📞 Phone:</strong> <a href="tel:07884568078">07884568078</a></div>
-              <div class="client-info-row"><strong>📧 Email:</strong> <a href="mailto:thebiryanis.co.uk@gmail.com">thebiryanis.co.uk@gmail.com</a></div>
-              <div class="client-info-row"><strong>🌐 Website:</strong> <a href="https://thebiryanis.co.uk/" target="_blank">thebiryanis.co.uk</a></div>
-              <a href="https://wa.me/447884568078" target="_blank" class="whatsapp-btn">💬 Chat on WhatsApp</a>
+              <div class="client-info-row"><span class="client-info-icon">📍</span> Kitchen 1C, 42 Higher Ardwick, Manchester M12 6DA</div>
+              <div class="client-info-row"><span class="client-info-icon">📞</span> <a href="tel:07884568078">07884&nbsp;568&nbsp;078</a></div>
+              <div class="client-info-row"><span class="client-info-icon">📧</span> <a href="mailto:thebiryanis.co.uk@gmail.com">thebiryanis.co.uk@gmail.com</a></div>
+              <div class="client-info-row"><span class="client-info-icon">🌐</span> <a href="https://thebiryanis.co.uk/" target="_blank">thebiryanis.co.uk</a></div>
+              <a href="https://wa.me/447884568078" target="_blank" class="wa-btn">💬&nbsp;&nbsp;Chat on WhatsApp</a>
             </div>
           </div>
         `;
-      } catch (error) {
-        console.error('Error:', error);
+      } catch (e) {
         alert('Failed to complete survey');
       }
     }
 
-    init();
+    renderVerify();
   </script>
-
-  <!-- Footer -->
-  <div class="footer">
-    <div>🍛 <strong>Manchester Biryani House</strong></div>
-    <div>Kitchen 1C, 42 Higher Ardwick, Manchester M12 6DA</div>
-    <div>📞 <a href="tel:07884568078">07884568078</a> | 📧 <a href="mailto:thebiryanis.co.uk@gmail.com">thebiryanis.co.uk@gmail.com</a></div>
-    <div>🌐 <a href="https://thebiryanis.co.uk/" target="_blank">thebiryanis.co.uk</a> | 💬 <a href="https://wa.me/447884568078" target="_blank">WhatsApp</a></div>
-    <div class="developed-by">Developed by <a href="https://www.businessanddatasolutions.com" target="_blank">BDS Tech Team</a></div>
-  </div>
-
 </body>
 </html>
