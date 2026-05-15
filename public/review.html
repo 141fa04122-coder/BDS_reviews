@@ -851,27 +851,9 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ sessionId, customerId, answers })
         });
-
-        const app = document.getElementById('app');
-        app.innerHTML = `
-          <div class="gold-line"></div>
-          <div class="success-box">
-            <div class="success-icon">🎉</div>
-            <h2>Thank You!</h2>
-            <p>We really appreciate you taking the time to share your thoughts with us.</p>
-            <div class="reward-badge">✓ Feedback Received</div>
-            <div class="client-info">
-              <div class="client-info-row"><span class="client-info-icon">📍</span> Kitchen 1C, 42 Higher Ardwick, Manchester M12 6DA</div>
-              <div class="client-info-row"><span class="client-info-icon">📞</span> <a href="tel:07884568078">07884&nbsp;568&nbsp;078</a></div>
-              <div class="client-info-row"><span class="client-info-icon">📧</span> <a href="mailto:thebiryanis.co.uk@gmail.com">thebiryanis.co.uk@gmail.com</a></div>
-              <div class="client-info-row"><span class="client-info-icon">🌐</span> <a href="https://thebiryanis.co.uk/" target="_blank">thebiryanis.co.uk</a></div>
-              <a href="https://wa.me/447884568078" target="_blank" class="wa-btn">💬&nbsp;&nbsp;Chat on WhatsApp</a>
-            </div>
-          </div>
-        `;
-      } catch (e) {
-        alert('Failed to complete survey');
-      }
+      } catch (e) {}
+      // Redirect to loyalty page
+      window.location.href = `${API_BASE}/loyalty.html?cid=${customerId}`;
     }
 
     renderVerify();
