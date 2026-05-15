@@ -846,13 +846,19 @@
 
     async function completeSurvey() {
       try {
-        await fetch(`${API_BASE}/api/complete-survey`, {
+        const res = await fetch(`${API_BASE}/api/complete-survey`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ sessionId, customerId, answers })
         });
+        const data = await res.json();
+        if (data.success) {
+          const waNote = data.joinWhatsApp ? ' +25 WhatsApp bonus!' : '';
+          window.location.href = `${API_BASE}/loyalty.html?cid=${customerId}&pts=${data.totalPoints||0}&ref=${encodeURIComponent(data.referralCode||'')}&promo=${data.referralCode||''}&wa=${data.joinWhatsApp?'1':'0'}${waNote}`;
+          return;
+        }
       } catch (e) {}
-      // Redirect to loyalty page
+      // Fallback redirect
       window.location.href = `${API_BASE}/loyalty.html?cid=${customerId}`;
     }
 

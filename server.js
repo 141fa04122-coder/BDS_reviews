@@ -280,24 +280,50 @@ app.post('/api/complete-survey', async (req, res) => {
         .eq('id', customerId);
     }
 
-    // Get rewards progress
-    const totalPoints = (customer?.total_points || 0) + 50;
+    // Join WhatsApp bonus
+    const joinWhatsApp = answers.join_whatsapp === 'yes';
+    if (joinWhatsApp && !customer?.whatsapp_joined) {
+      await db.supabase
+        .from('customers')
+        .update({ whatsapp_joined: true })
+        .eq('id', customerId);
+      await db.supabase
+        .from('points_history')
+        .insert([{
+          customer_id: customerId,
+          points: 25,
+          action: 'review',
+          description: 'Joined WhatsApp VIP group'
+        }]);
+      await db.supabase.rpc('increment_customer_points', { p_customer_id: customerId, p_points: 25 });
+    }
+
+    // Get updated customer for points
+    const updatedCustomer = await db.supabase
+      .from('customers')
+      .select('total_points')
+      .eq('id', customerId)
+      .single();
+
+    const totalPoints = updatedCustomer?.total_points || (customer?.total_points || 0) + 50;
+
     const pointsToDessert = Math.max(0, 500 - totalPoints);
     const pointsToDrink = Math.max(0, 1000 - totalPoints);
 
     res.json({
       success: true,
       message: 'Thank you for completing the survey!',
-      pointsEarned: 50,
+      pointsEarned: joinWhatsApp ? 75 : 50,
       isFirstReview: isFirst,
       totalPoints,
       referralCode,
-      referralLink: `${window.location.origin}/review.html?ref=${referralCode}`,
-      whatsappGroup: 'https://chat.whatsapp.com/thebiryanisVIP', // replace with actual
+      referralLink: `${req.protocol}://${req.get('host')}/review.html?ref=${referralCode}`,
+      whatsappGroup: 'https://chat.whatsapp.com/thebiryanisVIP',
+      joinWhatsApp,
       rewards: {
         pointsToDessert,
         pointsToDrink,
-        nextReward: pointsToDessert <= 0 ? 'dessert' : (pointsToDrink <= 0 ? 'drink' : (500 - totalPoints) + ' pts to dessert')
+        nextReward: pointsToDessert <= 0 ? 'dessert' : (pointsToDrink <= 0 ? 'drink' : `${Math.max(0,500-totalPoints)} pts to Free Dessert`)
       }
     });
   } catch (error) {
