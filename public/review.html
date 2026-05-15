@@ -88,7 +88,27 @@
     .brand-logo img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
+      padding: 10px;
+    }
+
+    .brand-logo-sm {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-logo-sm img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 6px;
     }
 
     .brand-text {
@@ -265,15 +285,13 @@
     /* Rating */
     .rating-strip {
       display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 10px;
       margin-bottom: 20px;
     }
 
     .rating-item {
-      flex: 1;
-      min-width: 56px;
-      text-align: center;
+      width: 100%;
     }
 
     /* Textarea */
@@ -559,15 +577,10 @@
         gap: 10px;
       }
 
-      .brand-logo {
-        width: 40px;
-        height: 40px;
-        border-radius: 10px;
-      }
+       .brand-text h1 {
+         font-size: 1.1rem;
+       }
 
-      .brand-text h1 {
-        font-size: 1.1rem;
-      }
 
       .brand-text .tagline {
         font-size: 0.72rem;
@@ -646,9 +659,6 @@
       const app = document.getElementById('app');
       app.innerHTML = `
         <div class="header">
-          <a href="https://www.businessanddatasolutions.com" target="_blank" title="BDS Tech Team" class="brand-logo">
-            <img src="https://res.cloudinary.com/dsf4d41i8/image/upload/v1770554625/BDS_Logowhite_odmpw0_vyhjes.png" alt="BDS">
-          </a>
           <div class="brand-text">
             <h1>The Biryanis</h1>
             <div class="tagline">Authentic flavours, delivered fresh</div>
@@ -734,9 +744,6 @@
       const q = currentQuestion;
 
       let html = `<div class="header">
-        <a href="https://www.businessanddatasolutions.com" target="_blank" title="BDS Tech Team" class="brand-logo">
-          <img src="https://res.cloudinary.com/dsf4d41i8/image/upload/v1770554625/BDS_Logowhite_odmpw0_vyhjes.png" alt="BDS">
-        </a>
         <div class="brand-text">
           <h1>The Biryanis</h1>
           <div class="tagline">Authentic flavours, delivered fresh</div>
@@ -864,5 +871,14 @@
 
     renderVerify();
   </script>
+
+  <div class="footer">
+    <a href="https://www.businessanddatasolutions.com" target="_blank" class="brand-logo" style="display:inline-flex;vertical-align:middle;margin-bottom:6px">
+      <img src="https://res.cloudinary.com/dsf4d41i8/image/upload/v1770554625/BDS_Logowhite_odmpw0_vyhjes.png" alt="BDS">
+    </a>
+    <div>Powered by Business &amp; Data Solutions</div>
+    <div>tech@businessanddatasolutions.com</div>
+  </div>
+
 </body>
 </html>
