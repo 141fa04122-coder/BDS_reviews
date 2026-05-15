@@ -17,10 +17,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Export for Vercel serverless
 module.exports = app;
 
-// Initialize database on startup
-if (db.initSupabase) {
-  db.initSupabase().catch(console.error);
-}
+// Test database connection on startup
+db.testConnection().catch(console.error);
 
 // Verify user by phone or email
 app.post('/api/verify', async (req, res) => {

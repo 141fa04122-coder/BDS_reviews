@@ -10,63 +10,50 @@ if (supabaseUrl && supabaseAnonKey) {
   supabase = createClient(supabaseUrl, supabaseAnonKey);
   console.log('✅ Supabase client initialized');
 } else {
-  console.log('⚠️  No SUPABASE_URL/SUPABASE_ANON_KEY found. Using local SQLite.');
-  console.log('   For production: create .env file with Supabase credentials');
+  console.log('❌ Missing SUPABASE_URL or SUPABASE_ANON_KEY environment variables');
+  console.log('   Set these in your Vercel project settings or local .env file');
 }
 
-// Initialize: verify connection and tables exist
-async function initSupabase() {
-  if (!supabase) return;
+// Test connection and list tables
+async function testConnection() {
+  if (!supabase) return false;
 
   try {
-    // Test connection
-    const { error } = await supabase.from('customers').select('count').limit(1);
+    const { data, error } = await supabase.from('survey_responses').select('count').limit(1);
     if (error) {
-      console.log('⚠️  Tables not found. Run supabase-setup.sql in Supabase SQL Editor.');
-      console.log('   Or create tables manually before deploying.');
-      return;
+      console.log('⚠️  Tables not initialized. Run supabase-setup.sql in Supabase SQL Editor.');
+      return false;
     }
     console.log('✅ Database connection verified');
+    return true;
   } catch (err) {
-    console.log('⚠️  Database check skipped:', err.message);
+    console.log('⚠️  Database check failed:', err.message);
+    return false;
   }
 }
 
 // Find or create customer
 async function findOrCreateCustomer(phone, email) {
   if (!supabase) {
-    const db = require('./database');
-    let customer = null;
-
-    if (phone) {
-      customer = db.prepare('SELECT * FROM customers WHERE phone_number = ?').get(phone);
-    }
-    if (!customer && email) {
-      customer = db.prepare('SELECT * FROM customers WHERE email = ?').get(email);
-    }
-
-    if (!customer) {
-      const stmt = db.prepare('INSERT INTO customers (phone_number, email, name) VALUES (?, ?, ?)');
-      stmt.run(phone, email, 'Customer');
-      customer = db.prepare('SELECT * FROM customers WHERE id = last_insert_rowid()').get();
-    }
-    return customer;
+    throw new Error('Supabase not initialized. Check environment variables.');
   }
 
-  let { data: customer, error } = await supabase
+  // Try to find by phone or email
+  let { data: customer } = await supabase
     .from('customers')
     .select('*')
     .eq('phone_number', phone)
     .single();
 
   if (!customer && email) {
-    ({ data: customer, error } = await supabase
+    customer = await supabase
       .from('customers')
       .select('*')
       .eq('email', email)
-      .single());
+      .single();
   }
 
+  // Create if not exists
   if (!customer) {
     const { data: newCustomer, error: insertError } = await supabase
       .from('customers')
@@ -87,30 +74,7 @@ async function findOrCreateCustomer(phone, email) {
 // Save survey response
 async function saveSurveyResponse(sessionId, customerId, answers) {
   if (!supabase) {
-    const db = require('./database');
-    const stmt = db.prepare(`
-      INSERT INTO survey_responses (
-        customer_id, session_id, overall_rating, liked_food,
-        favourite_dishes, visit_frequency, food_preferences,
-        cares_about_offers, ambiance_preference, preferred_deals,
-        wants_to_return, additional_comments
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `);
-    stmt.run(
-      customerId,
-      sessionId,
-      answers.overall_rating || null,
-      answers.like_food === 'yes' ? true : (answers.like_food === 'no' ? false : null),
-      answers.favourite_dishes ? JSON.stringify(answers.favourite_dishes) : null,
-      answers.visit_frequency || null,
-      answers.food_preferences ? JSON.stringify(answers.food_preferences) : null,
-      answers.cares_about_offers ? JSON.stringify(answers.cares_about_offers) : null,
-      answers.ambiance_preference ? JSON.stringify(answers.ambiance_preference) : null,
-      answers.combo_deals_interest || answers.preferred_deals || null,
-      answers.wants_to_return === 'yes' ? 1 : (answers.wants_to_return === 'maybe' ? 0 : -1),
-      answers.additional_comments || null
-    );
-    return { success: true };
+    throw new Error('Supabase not initialized. Check environment variables.');
   }
 
   const { error } = await supabase
@@ -123,7 +87,7 @@ async function saveSurveyResponse(sessionId, customerId, answers) {
       favourite_dishes: answers.favourite_dishes || null,
       visit_frequency: answers.visit_frequency || null,
       food_preferences: answers.food_preferences || null,
-      cares_about_offers: typeof answers.cares_about_offers === 'boolean' ? answers.cares_about_offers : null,
+      cares_about_offers: answers.cares_about_offers || null,
       ambiance_preference: answers.ambiance_preference || null,
       preferred_deals: answers.combo_deals_interest || answers.preferred_deals || null,
       wants_to_return: answers.wants_to_return === 'yes' ? 1 : (answers.wants_to_return === 'maybe' ? 0 : -1),
@@ -141,8 +105,7 @@ async function saveSurveyResponse(sessionId, customerId, answers) {
 // Get all responses (for admin)
 async function getAllResponses() {
   if (!supabase) {
-    const db = require('./database');
-    return db.prepare('SELECT * FROM survey_responses ORDER BY completed_at DESC').all();
+    throw new Error('Supabase not initialized. Check environment variables.');
   }
 
   const { data, error } = await supabase
@@ -160,7 +123,7 @@ async function getAllResponses() {
 
 module.exports = {
   supabase,
-  initSupabase,
+  testConnection,
   findOrCreateCustomer,
   saveSurveyResponse,
   getAllResponses
