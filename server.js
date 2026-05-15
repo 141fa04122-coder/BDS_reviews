@@ -318,7 +318,7 @@ app.post('/api/complete-survey', async (req, res) => {
       totalPoints,
       referralCode,
       referralLink: `${req.protocol}://${req.get('host')}/review.html?ref=${referralCode}`,
-      whatsappGroup: 'https://chat.whatsapp.com/thebiryanisVIP',
+      whatsappGroup: 'https://chat.whatsapp.com/E2VkOA9tvwtAjNybSbQTAl',
       joinWhatsApp,
       rewards: {
         pointsToDessert,
@@ -384,7 +384,7 @@ app.get('/api/loyalty/:customerId', async (req, res) => {
         totalPoints,
         referralCode: customer.referral_code,
         referralLink: `${req.protocol}://${req.get('host')}/review.html?ref=${customer.referral_code}`,
-        whatsappGroup: 'https://chat.whatsapp.com/thebiryanisVIP',
+        whatsappGroup: 'https://chat.whatsapp.com/E2VkOA9tvwtAjNybSbQTAl',
         whatsappJoined: customer.whatsapp_joined || false,
         pointsToDessert: Math.max(0, 500 - totalPoints),
         pointsToDrink: Math.max(0, 1000 - totalPoints),
@@ -429,7 +429,7 @@ app.post('/api/loyalty/join-whatsapp', async (req, res) => {
 
     await db.supabase.rpc('increment_customer_points', { p_customer_id: customerId, p_points: 25 });
 
-    res.json({ success: true, pointsEarned: 25, whatsappLink: 'https://chat.whatsapp.com/thebiryanisVIP' });
+    res.json({ success: true, pointsEarned: 25, whatsappLink: 'https://chat.whatsapp.com/E2VkOA9tvwtAjNybSbQTAl' });
   } catch (error) {
     console.error('WhatsApp join error:', error);
     res.status(500).json({ error: 'Failed' });
